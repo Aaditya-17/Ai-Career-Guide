@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-    return (
-        <div>
-            Hello Guidex
-            <Button>Hello </Button>
-        </div>
-    );
+    return <div>Hello Guidex</div>;
 }

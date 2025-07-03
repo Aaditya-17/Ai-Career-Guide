@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -20,27 +21,30 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className="dark" style={{ "color-scheme": "dark" }}>
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem
-                    disableTransitionOnChange
+        <ClerkProvider>
+            <html lang="en" className="dark" style={{ "color-scheme": "dark" }}>
+                <body
+                    className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
-                    {/* header */}
-                    <Header />
-                    <main className="min-h-screen">{children}</main>
-                    {/* footer */}
-                    <footer className="bg-muted/50 py-12">
-                        <div className="container mx-auto px-4 text-center">
-                            <p>Made with ❤ by Aditya</p>
-                        </div>
-                    </footer>
-                </ThemeProvider>
-            </body>
-        </html>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {/* header */}
+                        <Header />
+
+                        <main className="min-h-screen">{children}</main>
+                        {/* footer */}
+                        <footer className="bg-muted/50 py-12">
+                            <div className="container mx-auto px-4 text-center">
+                                <p>Made with ❤ by Aditya</p>
+                            </div>
+                        </footer>
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
